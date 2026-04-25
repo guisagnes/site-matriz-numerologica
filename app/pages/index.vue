@@ -54,29 +54,31 @@
         </div>
 
         <!-- Sexo -->
-        <div class="gender-row">
-          <button
-            type="button"
-            class="gender-pill"
-            :class="{ 'gender-pill--active': form.gender === 'F' }"
-            @click="selectGender('F')"
-            :aria-pressed="form.gender === 'F'"
-          >
-            Feminino
-          </button>
-          <button
-            type="button"
-            class="gender-pill"
-            :class="{ 'gender-pill--active': form.gender === 'M' }"
-            @click="selectGender('M')"
-            :aria-pressed="form.gender === 'M'"
-          >
-            Masculino
-          </button>
+        <div class="gender-section">
+          <div class="gender-row">
+            <button
+              type="button"
+              class="gender-pill"
+              :class="{ 'gender-pill--active': form.gender === 'F' }"
+              @click="selectGender('F')"
+              :aria-pressed="form.gender === 'F'"
+            >
+              Feminino
+            </button>
+            <button
+              type="button"
+              class="gender-pill"
+              :class="{ 'gender-pill--active': form.gender === 'M' }"
+              @click="selectGender('M')"
+              :aria-pressed="form.gender === 'M'"
+            >
+              Masculino
+            </button>
+          </div>
+          <Transition name="fade">
+            <span v-if="errors.gender" class="field-error gender-error" role="alert">{{ errors.gender }}</span>
+          </Transition>
         </div>
-        <Transition name="fade">
-          <span v-if="errors.gender" class="field-error gender-error" role="alert">{{ errors.gender }}</span>
-        </Transition>
 
         <!-- Submit -->
         <button
@@ -343,11 +345,16 @@ useHead({
   padding-top: 4px;
 }
 
-.gender-error {
+.gender-section {
   position: relative;
-  text-align: center;
-  margin-top: calc(-1 * var(--space-4));
-  height: 0;
+  padding-bottom: var(--space-3);
+}
+
+.gender-error {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 /* ─── Gender — Pills discretos ───────────── */
