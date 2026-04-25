@@ -1,78 +1,71 @@
 <template>
   <main class="page-container">
     <div class="form-wrapper">
-      <!-- Glow effect behind the card -->
-      <div class="glow-effect"></div>
-      
-      <!-- Main Form Card -->
       <div class="form-card">
-        <div class="header">
-          <div class="icon-container">
-            <SparklesIcon class="icon-sparkle" />
-          </div>
+        <header class="header">
           <h1 class="title">Matriz Numerológica</h1>
-          <p class="subtitle">Revele os padrões ocultos do seu destino.</p>
-        </div>
+          <p class="subtitle">Decodifique a sua assinatura vibracional.</p>
+        </header>
 
         <form @submit.prevent="generateMap" class="form-content">
           <!-- Nome Completo -->
-          <div class="form-group">
-            <label for="name">Nome Completo</label>
-            <div class="input-wrapper">
-              <div class="input-icon">
-                <UserIcon class="icon" />
-              </div>
+          <div class="form-group" :class="{ 'is-focused': isNameFocused, 'is-filled': form.name }">
+            <label for="name" class="floating-label">Nome Completo</label>
+            <div class="input-container">
+              <UserIcon class="icon" />
               <input
                 id="name"
                 v-model="form.name"
                 @input="onNameInput"
+                @focus="isNameFocused = true"
+                @blur="isNameFocused = false"
                 type="text"
                 required
                 class="input-field"
-                placeholder="Seu nome de batismo"
               />
             </div>
           </div>
 
           <!-- Data de Nascimento -->
-          <div class="form-group">
-            <label for="birthdate">Data de Nascimento</label>
-            <div class="input-wrapper">
-              <div class="input-icon">
-                <CalendarIcon class="icon" />
-              </div>
+          <div class="form-group" :class="{ 'is-focused': isDateFocused, 'is-filled': form.birthdate }">
+            <label for="birthdate" class="floating-label">Data de Nascimento</label>
+            <div class="input-container">
+              <CalendarIcon class="icon" />
               <input
                 id="birthdate"
                 v-model="form.birthdate"
                 @input="onDateInput"
+                @focus="isDateFocused = true"
+                @blur="isDateFocused = false"
                 type="text"
                 required
                 class="input-field"
-                placeholder="DD/MM/AAAA"
+                placeholder=" "
                 maxlength="10"
               />
             </div>
+            <span class="helper-text" v-if="isDateFocused || form.birthdate">DD/MM/AAAA</span>
           </div>
 
-          <!-- Sexo -->
-          <div class="form-group">
-            <label>Sexo</label>
-            <div class="radio-group">
+          <!-- Sexo (Segmented Control) -->
+          <div class="form-group segmented-control-wrapper">
+            <label class="control-label">Sexo</label>
+            <div class="segmented-control">
               <div 
-                class="radio-card"
+                class="segment"
                 :class="{ 'active': form.gender === 'M' }"
                 @click="form.gender = 'M'"
               >
-                <span class="radio-label">Masculino</span>
+                Masculino
               </div>
-
               <div 
-                class="radio-card"
+                class="segment"
                 :class="{ 'active': form.gender === 'F' }"
                 @click="form.gender = 'F'"
               >
-                <span class="radio-label">Feminino</span>
+                Feminino
               </div>
+              <div class="segment-indicator" :class="'indicator-' + form.gender"></div>
             </div>
           </div>
 
@@ -85,10 +78,10 @@
             >
               <span v-if="isLoading" class="button-content">
                 <Loader2Icon class="icon animate-spin mr-2" />
-                Gerando...
+                Processando
               </span>
               <span v-else class="button-content">
-                Gerar Meu Mapa
+                Gerar Relatório
                 <ArrowRightIcon class="icon ml-2" />
               </span>
             </button>
@@ -102,7 +95,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { SparklesIcon, UserIcon, CalendarIcon, ArrowRightIcon, Loader2Icon } from 'lucide-vue-next'
+import { UserIcon, CalendarIcon, ArrowRightIcon, Loader2Icon } from 'lucide-vue-next'
 
 const router = useRouter()
 
@@ -113,20 +106,19 @@ const form = ref({
 })
 
 const isLoading = ref(false)
+const isNameFocused = ref(false)
+const isDateFocused = ref(false)
 
 const onNameInput = (event: Event) => {
   const target = event.target as HTMLInputElement
-  // Remove numbers and special characters, keep only letters and spaces
   form.value.name = target.value.replace(/[^a-zA-ZáàãâéèêíïóôõöúçñÁÀÃÂÉÈÊÍÏÓÔÕÖÚÇÑ\s]/g, '')
 }
 
 const onDateInput = (event: Event) => {
   const target = event.target as HTMLInputElement
-  let val = target.value.replace(/\D/g, '') // Keep only numbers
+  let val = target.value.replace(/\D/g, '')
   
-  if (val.length > 8) {
-    val = val.substring(0, 8)
-  }
+  if (val.length > 8) val = val.substring(0, 8)
   
   if (val.length > 4) {
     val = val.replace(/^(\d{2})(\d{2})(\d{1,4})$/, '$1/$2/$3')
@@ -138,24 +130,21 @@ const onDateInput = (event: Event) => {
 }
 
 const isFormValid = computed(() => {
-  return form.value.name.length > 2 && form.value.birthdate.length === 10 && form.value.gender !== ''
+  return form.value.name.trim().length >= 3 && form.value.birthdate.length === 10 && form.value.gender !== ''
 })
 
 const generateMap = async () => {
   if (!isFormValid.value) return
   
   isLoading.value = true
-  
-  // Simulate API call / generation delay
   await new Promise(resolve => setTimeout(resolve, 1500))
-  
   isLoading.value = false
   
   alert('Formulário enviado com sucesso!')
 }
 
 useHead({
-  title: 'Matriz Numerológica | Descubra o seu Destino'
+  title: 'Matriz Numerológica | Profissional'
 })
 </script>
 
@@ -166,182 +155,182 @@ useHead({
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  overflow: hidden; /* Evitar scroll */
+  overflow: hidden;
+  background-color: var(--color-bg);
 }
 
 .form-wrapper {
-  max-width: 26rem;
   width: 100%;
-  position: relative;
-  /* Reduzimos um pouco o tamanho máximo para caber melhor em telas menores */
-}
-
-.glow-effect {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  bottom: -4px;
-  left: -4px;
-  background: linear-gradient(to right, rgba(245, 158, 11, 0.2), rgba(139, 92, 246, 0.2));
-  border-radius: var(--radius-lg);
-  filter: blur(20px);
-  opacity: 0.5;
-  z-index: 0;
+  max-width: 400px;
 }
 
 .form-card {
-  position: relative;
-  background-color: var(--color-surface);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--color-border);
-  padding: 2rem;
-  border-radius: var(--radius-lg);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  z-index: 1;
+  background-color: #0f121b; /* Tom muito escuro e sólido, zero vidro */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 24px -6px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .header {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-
-.icon-container {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: var(--radius-full);
-  background-color: rgba(245, 158, 11, 0.1);
-  color: var(--color-primary);
-  margin-bottom: 0.75rem;
-  border: 1px solid rgba(245, 158, 11, 0.2);
-}
-
-.icon-sparkle {
-  width: 1.25rem;
-  height: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 .title {
   font-size: 1.5rem;
-  font-weight: 700;
-  background: linear-gradient(to right, #fef3c7, #f59e0b);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  letter-spacing: -0.025em;
+  font-weight: 500;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
   margin-bottom: 0.25rem;
 }
 
 .subtitle {
-  color: var(--color-text-muted);
-  font-size: 0.8rem;
+  color: #64748b;
+  font-size: 0.875rem;
+  font-weight: 400;
 }
 
 .form-content {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.75rem;
 }
 
+/* Floating Label Inputs UX/UI */
 .form-group {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 }
 
-label {
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #cbd5e1;
-}
-
-.input-wrapper {
+.input-container {
   position: relative;
-}
-
-.input-icon {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  padding-left: 0.75rem;
   display: flex;
   align-items: center;
-  pointer-events: none;
-  color: #64748b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  transition: border-color 0.3s ease;
+}
+
+.form-group.is-focused .input-container {
+  border-bottom-color: var(--color-primary);
 }
 
 .icon {
   width: 1.25rem;
   height: 1.25rem;
+  color: #64748b;
+  transition: color 0.3s ease;
+  margin-right: 0.75rem;
+}
+
+.form-group.is-focused .icon {
+  color: var(--color-primary);
 }
 
 .input-field {
-  display: block;
-  width: 100%;
-  padding: 0.65rem 0.65rem 0.65rem 2.5rem;
-  background-color: rgba(15, 23, 42, 0.5);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  color: var(--color-text);
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  font-size: 1rem;
   font-family: inherit;
-  font-size: 0.9rem;
-  transition: var(--transition);
+  padding: 0.5rem 0;
   outline: none;
 }
 
-.input-field:focus {
-  border-color: var(--color-border-focus);
-  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.25);
+.floating-label {
+  position: absolute;
+  left: 2rem;
+  top: 0.5rem;
+  font-size: 1rem;
+  color: #64748b;
+  pointer-events: none;
+  transition: all 0.2s ease-out;
+  transform-origin: left top;
 }
 
-.input-field::placeholder {
+/* Float active states */
+.form-group.is-focused .floating-label,
+.form-group.is-filled .floating-label {
+  transform: translateY(-1.5rem) scale(0.8);
+  color: #94a3b8;
+}
+
+.form-group.is-focused .floating-label {
+  color: var(--color-primary);
+}
+
+.helper-text {
+  font-size: 0.65rem;
   color: #475569;
+  position: absolute;
+  right: 0;
+  top: -1.2rem;
+  letter-spacing: 0.05em;
 }
 
-.radio-group {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+/* Segmented Control UI for Gender */
+.segmented-control-wrapper {
+  margin-top: 0.5rem;
+  gap: 0.75rem;
 }
 
-.radio-card {
+.control-label {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.segmented-control {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  padding: 0.75rem;
-  background-color: rgba(15, 23, 42, 0.5);
-  transition: var(--transition);
-  user-select: none;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.radio-card:hover {
-  background-color: var(--color-surface-hover);
-}
-
-.radio-card.active {
-  border-color: var(--color-border-focus);
-  background-color: rgba(245, 158, 11, 0.05);
-}
-
-.radio-label {
+.segment {
+  flex: 1;
+  text-align: center;
+  padding: 0.6rem 0;
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-text-muted);
+  color: #64748b;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
 }
 
-.radio-card.active .radio-label {
-  color: #fbbf24;
+.segment.active {
+  color: #fff;
 }
 
+.segment-indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  width: calc(50% - 4px);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0; /* Hidden initially until selected */
+}
+
+.segment-indicator.indicator-M {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.segment-indicator.indicator-F {
+  transform: translateX(100%);
+  opacity: 1;
+}
+
+/* Submit Button Minimalist Professional */
 .submit-container {
-  padding-top: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 .submit-button {
@@ -349,33 +338,27 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-md);
-  font-size: 0.875rem;
-  font-weight: 600;
+  padding: 0.875rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
   font-family: inherit;
-  color: #0f172a;
-  background: linear-gradient(to right, #fbbf24, #d97706);
+  color: #111827;
+  background-color: var(--color-primary); /* Solid Amber */
   border: none;
   cursor: pointer;
-  transition: var(--transition);
-  box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  transition: background-color 0.2s, opacity 0.2s;
 }
 
 .submit-button:hover:not(:disabled) {
-  background: linear-gradient(to right, #fcd34d, #f59e0b);
-  box-shadow: 0 0 30px rgba(251, 191, 36, 0.5);
-}
-
-.submit-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.5), 0 0 20px rgba(251, 191, 36, 0.3);
+  background-color: #fbbf24;
 }
 
 .submit-button:disabled {
-  opacity: 0.7;
+  opacity: 0.4;
   cursor: not-allowed;
-  filter: grayscale(0.5);
+  background-color: #475569;
+  color: #94a3b8;
 }
 
 .button-content {
@@ -383,33 +366,23 @@ label {
   align-items: center;
 }
 
-.mr-2 {
-  margin-right: 0.5rem;
-}
-
-.ml-2 {
-  margin-left: 0.5rem;
-}
+.mr-2 { margin-right: 0.5rem; }
+.ml-2 { margin-left: 0.5rem; }
 
 @keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .animate-spin {
   animation: spin 1s linear infinite;
 }
 
-@media (max-height: 700px) {
+@media (max-height: 650px) {
   .page-container {
     height: auto;
     min-height: 100vh;
     overflow: auto;
-    padding: 2rem 1rem;
   }
 }
 </style>
