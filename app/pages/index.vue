@@ -230,7 +230,7 @@ useHead({
 
 /* ─── Header ─────────────────────────────── */
 .header {
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-16);
 }
 
 .brand {
@@ -257,7 +257,7 @@ useHead({
 
 /* ─── Form ───────────────────────────────── */
 .form {
-  margin-top: -2rem;
+  margin-top: -4rem;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
