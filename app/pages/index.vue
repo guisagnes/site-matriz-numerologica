@@ -257,6 +257,7 @@ useHead({
 
 /* ─── Form ───────────────────────────────── */
 .form {
+  margin-top: -2rem;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
