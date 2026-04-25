@@ -230,23 +230,23 @@ useHead({
 
 /* ─── Header ─────────────────────────────── */
 .header {
-  margin-bottom: var(--space-16);
+  margin-bottom: var(--space-4);
 }
 
 .brand {
   display: inline-block;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: var(--color-primary-light);
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-2);
   opacity: 0.7;
 }
 
 .title {
-  font-size: 1.625rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-text);
   letter-spacing: -0.03em;
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-1);
 }
 
 .description {
@@ -257,22 +257,21 @@ useHead({
 
 /* ─── Form ───────────────────────────────── */
 .form {
-  margin-top: -4rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-2);
 }
 
 /* ─── Fields — Minimal, sem bordas laterais ─ */
 .field {
   text-align: left;
   position: relative;
-  padding-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
 }
 
 .field-input {
   width: 100%;
-  padding: var(--space-3) 0;
+  padding: var(--space-2) 0;
   background: transparent;
   border: none;
   border-bottom: 1px solid var(--color-border);
@@ -322,7 +321,6 @@ useHead({
   display: flex;
   gap: var(--space-3);
   justify-content: center;
-  margin-top: var(--space-2);
 }
 
 .gender-pill {
@@ -357,8 +355,8 @@ useHead({
 /* ─── Submit — discreto mas clicável ─────── */
 .submit {
   width: 100%;
-  padding: var(--space-4);
-  margin-top: var(--space-6);
+  padding: var(--space-3);
+  margin-top: var(--space-2);
   border: none;
   border-radius: var(--radius-full);
   background: var(--color-text);
