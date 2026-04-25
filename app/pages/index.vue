@@ -25,6 +25,7 @@
               <input
                 id="name"
                 v-model="form.name"
+                @input="onNameInput"
                 type="text"
                 required
                 class="input-field"
@@ -43,9 +44,12 @@
               <input
                 id="birthdate"
                 v-model="form.birthdate"
-                type="date"
+                @input="onDateInput"
+                type="text"
                 required
                 class="input-field"
+                placeholder="DD/MM/AAAA"
+                maxlength="10"
               />
             </div>
           </div>
@@ -54,21 +58,21 @@
           <div class="form-group">
             <label>Sexo</label>
             <div class="radio-group">
-              <label 
+              <div 
                 class="radio-card"
                 :class="{ 'active': form.gender === 'M' }"
+                @click="form.gender = 'M'"
               >
-                <input type="radio" name="gender" value="M" v-model="form.gender" class="sr-only" />
                 <span class="radio-label">Masculino</span>
-              </label>
+              </div>
 
-              <label 
+              <div 
                 class="radio-card"
                 :class="{ 'active': form.gender === 'F' }"
+                @click="form.gender = 'F'"
               >
-                <input type="radio" name="gender" value="F" v-model="form.gender" class="sr-only" />
                 <span class="radio-label">Feminino</span>
-              </label>
+              </div>
             </div>
           </div>
 
@@ -76,7 +80,7 @@
           <div class="submit-container">
             <button
               type="submit"
-              :disabled="isLoading"
+              :disabled="isLoading || !isFormValid"
               class="submit-button"
             >
               <span v-if="isLoading" class="button-content">
@@ -96,7 +100,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { SparklesIcon, UserIcon, CalendarIcon, ArrowRightIcon, Loader2Icon } from 'lucide-vue-next'
 
@@ -105,12 +109,41 @@ const router = useRouter()
 const form = ref({
   name: '',
   birthdate: '',
-  gender: 'F'
+  gender: ''
 })
 
 const isLoading = ref(false)
 
+const onNameInput = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  // Remove numbers and special characters, keep only letters and spaces
+  form.value.name = target.value.replace(/[^a-zA-ZáàãâéèêíïóôõöúçñÁÀÃÂÉÈÊÍÏÓÔÕÖÚÇÑ\s]/g, '')
+}
+
+const onDateInput = (event: Event) => {
+  const target = event.target as HTMLInputElement
+  let val = target.value.replace(/\D/g, '') // Keep only numbers
+  
+  if (val.length > 8) {
+    val = val.substring(0, 8)
+  }
+  
+  if (val.length > 4) {
+    val = val.replace(/^(\d{2})(\d{2})(\d{1,4})$/, '$1/$2/$3')
+  } else if (val.length > 2) {
+    val = val.replace(/^(\d{2})(\d{1,2})$/, '$1/$2')
+  }
+  
+  form.value.birthdate = val
+}
+
+const isFormValid = computed(() => {
+  return form.value.name.length > 2 && form.value.birthdate.length === 10 && form.value.gender !== ''
+})
+
 const generateMap = async () => {
+  if (!isFormValid.value) return
+  
   isLoading.value = true
   
   // Simulate API call / generation delay
@@ -128,17 +161,19 @@ useHead({
 
 <style scoped>
 .page-container {
-  flex-grow: 1;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 1rem;
+  overflow: hidden; /* Evitar scroll */
 }
 
 .form-wrapper {
-  max-width: 28rem;
+  max-width: 26rem;
   width: 100%;
   position: relative;
+  /* Reduzimos um pouco o tamanho máximo para caber melhor em telas menores */
 }
 
 .glow-effect {
@@ -160,7 +195,7 @@ useHead({
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-border);
-  padding: 2.5rem;
+  padding: 2rem;
   border-radius: var(--radius-lg);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   z-index: 1;
@@ -168,7 +203,7 @@ useHead({
 
 .header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .icon-container {
@@ -180,35 +215,35 @@ useHead({
   border-radius: var(--radius-full);
   background-color: rgba(245, 158, 11, 0.1);
   color: var(--color-primary);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
 .icon-sparkle {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .title {
-  font-size: 1.875rem;
+  font-size: 1.5rem;
   font-weight: 700;
   background: linear-gradient(to right, #fef3c7, #f59e0b);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   letter-spacing: -0.025em;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .subtitle {
   color: var(--color-text-muted);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
 }
 
 .form-content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .form-group {
@@ -218,7 +253,7 @@ useHead({
 }
 
 label {
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: #cbd5e1;
 }
@@ -247,13 +282,13 @@ label {
 .input-field {
   display: block;
   width: 100%;
-  padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+  padding: 0.65rem 0.65rem 0.65rem 2.5rem;
   background-color: rgba(15, 23, 42, 0.5);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-text);
   font-family: inherit;
-  font-size: 1rem;
+  font-size: 0.9rem;
   transition: var(--transition);
   outline: none;
 }
@@ -267,10 +302,6 @@ label {
   color: #475569;
 }
 
-.input-field[type="date"] {
-  color-scheme: dark;
-}
-
 .radio-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -278,16 +309,16 @@ label {
 }
 
 .radio-card {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   border-radius: var(--radius-md);
   border: 1px solid var(--color-border);
-  padding: 1rem;
+  padding: 0.75rem;
   background-color: rgba(15, 23, 42, 0.5);
   transition: var(--transition);
+  user-select: none;
 }
 
 .radio-card:hover {
@@ -297,18 +328,6 @@ label {
 .radio-card.active {
   border-color: var(--color-border-focus);
   background-color: rgba(245, 158, 11, 0.05);
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
 }
 
 .radio-label {
@@ -322,7 +341,7 @@ label {
 }
 
 .submit-container {
-  padding-top: 1rem;
+  padding-top: 0.5rem;
 }
 
 .submit-button {
@@ -330,7 +349,7 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.875rem 1rem;
+  padding: 0.75rem 1rem;
   border-radius: var(--radius-md);
   font-size: 0.875rem;
   font-weight: 600;
@@ -356,6 +375,7 @@ label {
 .submit-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
+  filter: grayscale(0.5);
 }
 
 .button-content {
@@ -384,9 +404,12 @@ label {
   animation: spin 1s linear infinite;
 }
 
-@media (max-width: 640px) {
-  .form-card {
-    padding: 2rem;
+@media (max-height: 700px) {
+  .page-container {
+    height: auto;
+    min-height: 100vh;
+    overflow: auto;
+    padding: 2rem 1rem;
   }
 }
 </style>
