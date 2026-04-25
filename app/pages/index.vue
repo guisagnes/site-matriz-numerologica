@@ -301,12 +301,13 @@ useHead({
 
 .field-error {
   position: absolute;
-  bottom: 0;
+  bottom: -8px;
   left: 0;
   right: 0;
   font-size: 0.7rem;
   color: var(--color-error);
   text-align: center;
+  padding-top: 4px;
 }
 
 .gender-error {
@@ -318,6 +319,7 @@ useHead({
 
 /* ─── Gender — Pills discretos ───────────── */
 .gender-row {
+  padding: 1rem;
   display: flex;
   gap: var(--space-3);
   justify-content: center;
