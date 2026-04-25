@@ -266,6 +266,8 @@ useHead({
 /* ─── Fields — Minimal, sem bordas laterais ─ */
 .field {
   text-align: left;
+  position: relative;
+  padding-bottom: var(--space-4);
 }
 
 .field-input {
@@ -299,16 +301,20 @@ useHead({
 }
 
 .field-error {
-  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   font-size: 0.7rem;
   color: var(--color-error);
   text-align: center;
-  margin-top: var(--space-1);
 }
 
 .gender-error {
+  position: relative;
   text-align: center;
-  margin-top: calc(-1 * var(--space-2));
+  margin-top: calc(-1 * var(--space-4));
+  height: 0;
 }
 
 /* ─── Gender — Pills discretos ───────────── */
