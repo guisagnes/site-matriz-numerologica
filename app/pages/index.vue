@@ -237,8 +237,8 @@ useHead({
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 720px;
-  height: 720px;
+  width: 620px;
+  height: 620px;
   pointer-events: none;
   z-index: 0;
   animation: rotate-slow 120s linear infinite;
