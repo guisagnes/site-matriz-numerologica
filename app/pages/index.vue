@@ -296,7 +296,7 @@ useHead({
 }
 
 .field--error .field-input {
-  border-bottom-color: var(--color-error);
+  border-bottom-color: var(--color-primary-light);
 }
 
 .field-error {
@@ -305,7 +305,7 @@ useHead({
   left: 0;
   right: 0;
   font-size: 0.7rem;
-  color: var(--color-error);
+  color: var(--color-primary-light);
   text-align: center;
   padding-top: 4px;
 }
