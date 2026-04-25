@@ -1,29 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
+/* ─────────────────────────────────────
+   Design System — Tema Claro Acolhedor
+   ───────────────────────────────────── */
 :root {
-  --color-bg: #090b14;
-  --color-surface: rgba(15, 23, 42, 0.6);
-  --color-surface-hover: rgba(30, 41, 59, 0.8);
-  --color-text: #e2e8f0;
-  --color-text-muted: #94a3b8;
-  
-  --color-primary: #f59e0b; /* Amber */
-  --color-primary-glow: rgba(245, 158, 11, 0.4);
-  --color-secondary: #8b5cf6; /* Violet */
-  --color-secondary-glow: rgba(139, 92, 246, 0.2);
-  
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-border-focus: rgba(245, 158, 11, 0.5);
+  /* Background */
+  --color-bg: #faf9f7;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f5f3ef;
 
-  --font-sans: 'Outfit', sans-serif;
-  --transition: all 0.3s ease;
-  --radius-sm: 8px;
-  --radius-md: 12px;
+  /* Text */
+  --color-text: #1a1a2e;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+
+  /* Primary — Violeta Suave (espiritualidade, intuição) */
+  --color-primary: #7c5cbf;
+  --color-primary-light: #a78bfa;
+  --color-primary-soft: rgba(124, 92, 191, 0.08);
+  --color-primary-hover: #6b4fa8;
+
+  /* Accent — Dourado Quente (numerologia, sabedoria) */
+  --color-accent: #c9953c;
+  --color-accent-soft: rgba(201, 149, 60, 0.1);
+
+  /* Borders */
+  --color-border: #e5e2dd;
+  --color-border-focus: var(--color-primary);
+
+  /* Feedback */
+  --color-error: #dc2626;
+  --color-error-soft: rgba(220, 38, 38, 0.06);
+  --color-success: #16a34a;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing (múltiplos de 4px conforme Pixel) */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
   --radius-lg: 16px;
   --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+
+  /* Transitions */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration: 200ms;
 }
 
-* {
+/* Reset */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -33,26 +73,21 @@ body {
   font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-text);
-  line-height: 1.5;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Background effects */
-.bg-gradient-radial {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at top center, var(--color-secondary-glow) 0%, var(--color-bg) 60%);
-  z-index: -1;
-  pointer-events: none;
 }
 
 ::selection {
-  background-color: rgba(245, 158, 11, 0.3);
-  color: #fef3c7;
+  background-color: var(--color-primary-soft);
+  color: var(--color-primary);
+}
+
+/* Respeitar preferência de redução de movimento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

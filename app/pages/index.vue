@@ -1,91 +1,104 @@
 <template>
-  <main class="page-container">
-    <div class="form-wrapper">
+  <main class="page">
+    <!-- Decorative subtle background -->
+    <div class="bg-decoration" aria-hidden="true">
+      <div class="bg-circle bg-circle-1"></div>
+      <div class="bg-circle bg-circle-2"></div>
+    </div>
+
+    <div class="page-content">
       <div class="form-card">
-        <header class="header">
-          <h1 class="title">Matriz Numerológica</h1>
-          <p class="subtitle">Decodifique a sua assinatura vibracional.</p>
+        <!-- Header -->
+        <header class="card-header">
+          <div class="brand-icon" aria-hidden="true">✦</div>
+          <h1 class="card-title">Descubra sua Matriz Numerológica</h1>
+          <p class="card-description">
+            Preencha seus dados abaixo para revelar os números que influenciam sua jornada de vida.
+          </p>
         </header>
 
-        <form @submit.prevent="generateMap" class="form-content">
-          <!-- Nome Completo -->
-          <div class="form-group" :class="{ 'is-focused': isNameFocused, 'is-filled': form.name }">
-            <label for="name" class="floating-label">Nome Completo</label>
-            <div class="input-container">
-              <UserIcon class="icon" />
-              <input
-                id="name"
-                v-model="form.name"
-                @input="onNameInput"
-                @focus="isNameFocused = true"
-                @blur="isNameFocused = false"
-                type="text"
-                required
-                class="input-field"
-              />
-            </div>
+        <!-- Form -->
+        <form @submit.prevent="handleSubmit" class="form" novalidate>
+          <!-- Nome -->
+          <div class="field" :class="{ 'field--error': errors.name }">
+            <label for="input-name" class="field-label">Nome completo</label>
+            <input
+              id="input-name"
+              ref="nameInputRef"
+              v-model="form.name"
+              @input="onNameInput"
+              @blur="validateName"
+              type="text"
+              autocomplete="name"
+              class="field-input"
+              placeholder="Ex: Maria da Silva"
+            />
+            <Transition name="fade">
+              <span v-if="errors.name" class="field-error" role="alert">{{ errors.name }}</span>
+            </Transition>
           </div>
 
           <!-- Data de Nascimento -->
-          <div class="form-group" :class="{ 'is-focused': isDateFocused, 'is-filled': form.birthdate }">
-            <label for="birthdate" class="floating-label">Data de Nascimento</label>
-            <div class="input-container">
-              <CalendarIcon class="icon" />
-              <input
-                id="birthdate"
-                v-model="form.birthdate"
-                @input="onDateInput"
-                @focus="isDateFocused = true"
-                @blur="isDateFocused = false"
-                type="text"
-                required
-                class="input-field"
-                placeholder=" "
-                maxlength="10"
-              />
-            </div>
-            <span class="helper-text" v-if="isDateFocused || form.birthdate">DD/MM/AAAA</span>
+          <div class="field" :class="{ 'field--error': errors.birthdate }">
+            <label for="input-birthdate" class="field-label">Data de nascimento</label>
+            <input
+              id="input-birthdate"
+              v-model="form.birthdate"
+              @input="onDateInput"
+              @blur="validateDate"
+              type="text"
+              inputmode="numeric"
+              class="field-input"
+              placeholder="DD/MM/AAAA"
+              maxlength="10"
+            />
+            <Transition name="fade">
+              <span v-if="errors.birthdate" class="field-error" role="alert">{{ errors.birthdate }}</span>
+            </Transition>
           </div>
 
-          <!-- Sexo (Segmented Control) -->
-          <div class="form-group segmented-control-wrapper">
-            <label class="control-label">Sexo</label>
-            <div class="segmented-control">
-              <div 
-                class="segment"
-                :class="{ 'active': form.gender === 'M' }"
-                @click="form.gender = 'M'"
-              >
-                Masculino
-              </div>
-              <div 
-                class="segment"
-                :class="{ 'active': form.gender === 'F' }"
+          <!-- Sexo -->
+          <fieldset class="field">
+            <legend class="field-label">Sexo</legend>
+            <div class="gender-options">
+              <button
+                type="button"
+                class="gender-button"
+                :class="{ 'gender-button--active': form.gender === 'F' }"
                 @click="form.gender = 'F'"
+                :aria-pressed="form.gender === 'F'"
               >
                 Feminino
-              </div>
-              <div class="segment-indicator" :class="'indicator-' + form.gender"></div>
+              </button>
+              <button
+                type="button"
+                class="gender-button"
+                :class="{ 'gender-button--active': form.gender === 'M' }"
+                @click="form.gender = 'M'"
+                :aria-pressed="form.gender === 'M'"
+              >
+                Masculino
+              </button>
             </div>
-          </div>
+            <Transition name="fade">
+              <span v-if="errors.gender" class="field-error" role="alert">{{ errors.gender }}</span>
+            </Transition>
+          </fieldset>
 
-          <!-- Submit Button -->
-          <div class="submit-container">
-            <button
-              type="submit"
-              :disabled="isLoading || !isFormValid"
-              class="submit-button"
-            >
-              <span v-if="isLoading" class="button-content">
-                <Loader2Icon class="icon animate-spin mr-2" />
-                Processando
-              </span>
-              <span v-else class="button-content">
-                Gerar Relatório
-                <ArrowRightIcon class="icon ml-2" />
-              </span>
-            </button>
-          </div>
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="submit-button"
+            :disabled="isLoading"
+          >
+            <span v-if="isLoading" class="submit-button-content">
+              <span class="spinner" aria-hidden="true"></span>
+              Calculando sua matriz…
+            </span>
+            <span v-else class="submit-button-content">
+              Gerar minha matriz
+            </span>
+          </button>
         </form>
       </div>
     </div>
@@ -93,296 +106,409 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
-import { UserIcon, CalendarIcon, ArrowRightIcon, Loader2Icon } from 'lucide-vue-next'
+import { ref, reactive, onMounted } from 'vue'
+import type { NumerologyFormData } from '~/types/numerology'
+import { useNumerology } from '~/composables/useNumerology'
 
-const router = useRouter()
+const { calculate, isValidDate } = useNumerology()
 
-const form = ref({
+const nameInputRef = ref<HTMLInputElement | null>(null)
+
+const form = reactive<NumerologyFormData>({
   name: '',
   birthdate: '',
-  gender: ''
+  gender: '',
+})
+
+const errors = reactive({
+  name: '',
+  birthdate: '',
+  gender: '',
 })
 
 const isLoading = ref(false)
-const isNameFocused = ref(false)
-const isDateFocused = ref(false)
+
+// ─── Validations ────────────────────────────
 
 const onNameInput = (event: Event) => {
   const target = event.target as HTMLInputElement
-  form.value.name = target.value.replace(/[^a-zA-ZáàãâéèêíïóôõöúçñÁÀÃÂÉÈÊÍÏÓÔÕÖÚÇÑ\s]/g, '')
+  // Permite apenas letras (incluindo acentuadas) e espaços
+  form.name = target.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '')
+  if (errors.name) validateName()
+}
+
+const validateName = () => {
+  if (!form.name.trim()) {
+    errors.name = 'Informe seu nome completo.'
+  } else if (form.name.trim().length < 3) {
+    errors.name = 'O nome precisa ter pelo menos 3 letras.'
+  } else if (!form.name.trim().includes(' ')) {
+    errors.name = 'Informe nome e sobrenome.'
+  } else {
+    errors.name = ''
+  }
 }
 
 const onDateInput = (event: Event) => {
   const target = event.target as HTMLInputElement
   let val = target.value.replace(/\D/g, '')
-  
+
   if (val.length > 8) val = val.substring(0, 8)
-  
+
   if (val.length > 4) {
     val = val.replace(/^(\d{2})(\d{2})(\d{1,4})$/, '$1/$2/$3')
   } else if (val.length > 2) {
     val = val.replace(/^(\d{2})(\d{1,2})$/, '$1/$2')
   }
-  
-  form.value.birthdate = val
+
+  form.birthdate = val
+  if (errors.birthdate && val.length === 10) validateDate()
 }
 
-const isFormValid = computed(() => {
-  return form.value.name.trim().length >= 3 && form.value.birthdate.length === 10 && form.value.gender !== ''
+const validateDate = () => {
+  if (!form.birthdate) {
+    errors.birthdate = 'Informe sua data de nascimento.'
+  } else if (form.birthdate.length !== 10) {
+    errors.birthdate = 'Data incompleta. Use o formato DD/MM/AAAA.'
+  } else if (!isValidDate(form.birthdate)) {
+    errors.birthdate = 'Data inválida. Verifique o dia, mês e ano.'
+  } else {
+    errors.birthdate = ''
+  }
+}
+
+const validateGender = () => {
+  if (!form.gender) {
+    errors.gender = 'Selecione uma opção.'
+  } else {
+    errors.gender = ''
+  }
+}
+
+// ─── Submit ─────────────────────────────────
+
+const handleSubmit = async () => {
+  validateName()
+  validateDate()
+  validateGender()
+
+  if (errors.name || errors.birthdate || errors.gender) return
+
+  isLoading.value = true
+
+  // Simula processamento (será substituído por navegação real depois)
+  await new Promise(resolve => setTimeout(resolve, 1200))
+
+  const result = calculate(form)
+  isLoading.value = false
+
+  // TODO: Navegar para a página de resultado passando os dados
+  // Temporariamente mostra os resultados no console
+  navigateTo({
+    path: '/resultado',
+    query: {
+      name: form.name,
+      birthdate: form.birthdate,
+      gender: form.gender,
+    }
+  })
+}
+
+// ─── Lifecycle ──────────────────────────────
+
+onMounted(() => {
+  nameInputRef.value?.focus()
 })
 
-const generateMap = async () => {
-  if (!isFormValid.value) return
-  
-  isLoading.value = true
-  await new Promise(resolve => setTimeout(resolve, 1500))
-  isLoading.value = false
-  
-  alert('Formulário enviado com sucesso!')
-}
-
 useHead({
-  title: 'Matriz Numerológica | Profissional'
+  title: 'Matriz Numerológica — Descubra seus números',
+  meta: [
+    { name: 'description', content: 'Calcule gratuitamente sua Matriz Numerológica completa. Descubra o Caminho de Vida, Número da Alma, Expressão e mais.' },
+  ],
 })
 </script>
 
 <style scoped>
-.page-container {
-  height: 100vh;
+.page {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  padding: var(--space-4);
+  position: relative;
   overflow: hidden;
-  background-color: var(--color-bg);
 }
 
-.form-wrapper {
+/* ─── Background Decoration ──────────────── */
+.bg-decoration {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+}
+
+.bg-circle-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--color-primary-soft);
+  background: radial-gradient(circle, rgba(124, 92, 191, 0.12) 0%, transparent 70%);
+  top: -100px;
+  right: -80px;
+}
+
+.bg-circle-2 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(201, 149, 60, 0.1) 0%, transparent 70%);
+  bottom: -80px;
+  left: -60px;
+}
+
+/* ─── Content ────────────────────────────── */
+.page-content {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 400px;
+  max-width: 440px;
 }
 
+/* ─── Card ───────────────────────────────── */
 .form-card {
-  background-color: #0f121b; /* Tom muito escuro e sólido, zero vidro */
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 4px 24px -6px rgba(0, 0, 0, 0.8), 0 0 1px 1px rgba(0, 0, 0, 0.5);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  box-shadow: var(--shadow-lg);
 }
 
-.header {
-  margin-bottom: 2rem;
+/* ─── Header ─────────────────────────────── */
+.card-header {
+  text-align: center;
+  margin-bottom: var(--space-8);
 }
 
-.title {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #f8fafc;
-  letter-spacing: -0.02em;
-  margin-bottom: 0.25rem;
-}
-
-.subtitle {
-  color: #64748b;
-  font-size: 0.875rem;
-  font-weight: 400;
-}
-
-.form-content {
-  display: flex;
-  flex-direction: column;
-  gap: 1.75rem;
-}
-
-/* Floating Label Inputs UX/UI */
-.form-group {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-}
-
-.input-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  transition: border-color 0.3s ease;
-}
-
-.form-group.is-focused .input-container {
-  border-bottom-color: var(--color-primary);
-}
-
-.icon {
-  width: 1.25rem;
-  height: 1.25rem;
-  color: #64748b;
-  transition: color 0.3s ease;
-  margin-right: 0.75rem;
-}
-
-.form-group.is-focused .icon {
+.brand-icon {
+  font-size: 1.75rem;
   color: var(--color-primary);
+  margin-bottom: var(--space-3);
+  line-height: 1;
 }
 
-.input-field {
-  flex: 1;
-  background: transparent;
+.card-title {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: var(--space-2);
+}
+
+.card-description {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* ─── Form ───────────────────────────────── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ─── Fields ─────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
   border: none;
-  color: #e2e8f0;
-  font-size: 1rem;
+  padding: 0;
+}
+
+.field-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.01em;
+}
+
+.field-input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
   font-family: inherit;
-  padding: 0.5rem 0;
+  font-size: 0.9375rem;
+  transition: border-color var(--duration) var(--ease-default),
+              box-shadow var(--duration) var(--ease-default);
   outline: none;
 }
 
-.floating-label {
-  position: absolute;
-  left: 2rem;
-  top: 0.5rem;
-  font-size: 1rem;
-  color: #64748b;
-  pointer-events: none;
-  transition: all 0.2s ease-out;
-  transform-origin: left top;
+.field-input::placeholder {
+  color: var(--color-text-muted);
 }
 
-/* Float active states */
-.form-group.is-focused .floating-label,
-.form-group.is-filled .floating-label {
-  transform: translateY(-1.5rem) scale(0.8);
-  color: #94a3b8;
+.field-input:hover {
+  border-color: #d1d5db;
 }
 
-.form-group.is-focused .floating-label {
+.field-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-soft);
+}
+
+.field--error .field-input {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 3px var(--color-error-soft);
+}
+
+.field-error {
+  font-size: 0.75rem;
+  color: var(--color-error);
+  line-height: 1.4;
+}
+
+/* ─── Gender Buttons ─────────────────────── */
+.gender-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.gender-button {
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-alt);
+  color: var(--color-text-secondary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--duration) var(--ease-default);
+}
+
+.gender-button:hover {
+  border-color: #d1d5db;
+  color: var(--color-text);
+  background: var(--color-surface);
+}
+
+.gender-button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.gender-button--active {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.gender-button--active:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-soft);
   color: var(--color-primary);
 }
 
-.helper-text {
-  font-size: 0.65rem;
-  color: #475569;
-  position: absolute;
-  right: 0;
-  top: -1.2rem;
-  letter-spacing: 0.05em;
-}
-
-/* Segmented Control UI for Gender */
-.segmented-control-wrapper {
-  margin-top: 0.5rem;
-  gap: 0.75rem;
-}
-
-.control-label {
-  font-size: 0.8rem;
-  color: #94a3b8;
-}
-
-.segmented-control {
-  position: relative;
-  display: flex;
-  background-color: rgba(255, 255, 255, 0.03);
-  border-radius: 8px;
-  padding: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.segment {
-  flex: 1;
-  text-align: center;
-  padding: 0.6rem 0;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: #64748b;
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
-  transition: color 0.3s ease;
-}
-
-.segment.active {
-  color: #fff;
-}
-
-.segment-indicator {
-  position: absolute;
-  top: 4px;
-  bottom: 4px;
-  width: calc(50% - 4px);
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  z-index: 1;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0; /* Hidden initially until selected */
-}
-
-.segment-indicator.indicator-M {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.segment-indicator.indicator-F {
-  transform: translateX(100%);
-  opacity: 1;
-}
-
-/* Submit Button Minimalist Professional */
-.submit-container {
-  margin-top: 1.5rem;
-}
-
+/* ─── Submit ─────────────────────────────── */
 .submit-button {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.875rem 1rem;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  font-family: inherit;
-  color: #111827;
-  background-color: var(--color-primary); /* Solid Amber */
+  padding: var(--space-4);
   border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s, opacity 0.2s;
+  transition: background-color var(--duration) var(--ease-default),
+              transform var(--duration) var(--ease-default);
+  margin-top: var(--space-2);
 }
 
 .submit-button:hover:not(:disabled) {
-  background-color: #fbbf24;
+  background: var(--color-primary-hover);
+}
+
+.submit-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.submit-button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .submit-button:disabled {
-  opacity: 0.4;
+  opacity: 0.7;
   cursor: not-allowed;
-  background-color: #475569;
-  color: #94a3b8;
 }
 
-.button-content {
+.submit-button-content {
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
 }
 
-.mr-2 { margin-right: 0.5rem; }
-.ml-2 { margin-left: 0.5rem; }
+/* ─── Spinner ────────────────────────────── */
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-.animate-spin {
-  animation: spin 1s linear infinite;
+/* ─── Transitions ────────────────────────── */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity var(--duration) var(--ease-default),
+              transform var(--duration) var(--ease-default);
 }
 
-@media (max-height: 650px) {
-  .page-container {
-    height: auto;
-    min-height: 100vh;
-    overflow: auto;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+/* ─── Responsive ─────────────────────────── */
+@media (max-width: 480px) {
+  .form-card {
+    padding: var(--space-6) var(--space-4);
+    border-radius: var(--radius-md);
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-height: 680px) {
+  .page {
+    align-items: flex-start;
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
   }
 }
 </style>
