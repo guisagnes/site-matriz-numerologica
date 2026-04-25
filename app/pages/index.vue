@@ -1,5 +1,10 @@
 <template>
   <main class="page">
+    <!-- Background: Matriz do Destino -->
+    <div class="bg-matrix" aria-hidden="true">
+      <img src="/matriz-destino.svg" alt="" class="bg-matrix-svg" />
+    </div>
+
     <div class="content">
       <!-- Header -->
       <header class="header">
@@ -220,12 +225,40 @@ useHead({
   align-items: center;
   justify-content: center;
   padding: var(--space-4);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Background Matrix ─────────────────── */
+.bg-matrix {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 550px;
+  height: 550px;
+  pointer-events: none;
+  z-index: 0;
+  animation: rotate-slow 120s linear infinite;
+}
+
+.bg-matrix-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@keyframes rotate-slow {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 .content {
   width: 100%;
   max-width: 360px;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* ─── Header ─────────────────────────────── */
