@@ -1,70 +1,70 @@
 {
   "meta": {
-    "title": "Matrix of Destiny — Discover your soul's map"
+    "title": "Destiny Matrix — Discover your soul's secret code"
   },
   "nav": {
-    "brand": "Matrix of Destiny",
+    "brand": "Destiny Matrix",
     "about": "The Matrix",
-    "howItWorks": "How It Works",
+    "howItWorks": "How it Works",
     "faq": "Questions"
   },
   "hero": {
-    "titleLine1": "Discover the map",
-    "titleLine2": "of your",
-    "titleHighlight": "soul",
-    "desc": "The Matrix of Destiny reveals your hidden talents, karmic challenges, and your life's mission — all from your date of birth.",
-    "perk1": "Free and instant",
-    "perk2": "Based on the 22 Arcana",
-    "perk3": "100% private"
+    "titleLine1": "Discover what",
+    "titleLine2": "is blocking your",
+    "titleHighlight": "destiny",
+    "desc": "Your birth date was no accident. It carries your soul's code. The Destiny Matrix reveals your hidden gifts, invisible karmic debts, and the mission you came here to fulfill. Generate your core matrix for free and take the first step toward clarity.",
+    "perk1": "Instant revelation",
+    "perk2": "Uncover repetitive patterns",
+    "perk3": "Based on the 22 Major Arcana"
   },
   "form": {
-    "lead": "Fill in to generate your matrix:",
+    "lead": "Enter your details to reveal the foundation of your Matrix:",
     "nameLabel": "Your name",
     "namePlaceholder": "Name or nickname",
-    "birthLabel": "Date of Birth",
+    "birthLabel": "Birth Date",
     "birthPlaceholder": "DD/MM/YYYY",
     "genderLabel": "Gender",
     "genderF": "Female",
     "genderM": "Male",
-    "submit": "Reveal My Matrix",
-    "trustMsg": "Your data is not stored",
-    "socialProof": "Used by therapists and numerologists in",
+    "submit": "Reveal My Destiny Now",
+    "trustMsg": "The basic calculation is 100% free. No data is saved.",
+    "socialProof": "Guiding the journey of thousands across",
     "socialProofCountries": "15+ countries",
-    "errorName": "Please enter your name.",
-    "errorDate": "Invalid date.",
-    "errorGender": "Please select."
+    "errorName": "We need to know what to call you.",
+    "errorDate": "Invalid date. The universe needs the exact moment.",
+    "errorGender": "Energy (polarity) matters. Please select."
   },
   "about": {
-    "title": "What is the Matrix of Destiny?",
-    "p1": "A self-knowledge system based on numerology and Tarot archetypes. It works as a map of your soul, calculated exclusively from your date of birth.",
-    "p2": "Unlike traditional methods, the Matrix identifies karmic patterns, financial blocks, and the keys to healthier relationships.",
-    "feature1Title": "Life Purpose",
-    "feature1Desc": "Discover what you came to accomplish and how to align your actions with your essence.",
-    "feature2Title": "Financial Channel",
-    "feature2Desc": "Understand your natural talents for prosperity and what blocks your flow of abundance.",
-    "feature3Title": "Relationships",
-    "feature3Desc": "Understand your love patterns and attract partnerships that nourish your soul."
+    "title": "Why is the Destiny Matrix different?",
+    "p1": "The Matrix is not just a generic reading. It is a profound system that combines the precision of Numerology with the archetypes of the 22 Major Arcana of the Tarot. Through a sacred octagram, we read your soul's frequencies at the exact moment of your arrival in this world.",
+    "p2": "Have you spent your life feeling like something is missing? Repeating cycles and facing blocks, whether in love or finances? The free map you generate today reveals your energy foundations. It is only the tip of the iceberg compared to the depth hidden in your complete matrix.",
+    "feature1Title": "The Missing Piece (Purpose)",
+    "feature1Desc": "Discover your soul's exact mission in this life and why you feel the emptiness you do.",
+    "feature2Title": "Love and Karma",
+    "feature2Desc": "Reveal the invisible pattern of your romantic choices and how to break painful cycles.",
+    "feature3Title": "The Wealth Channel",
+    "feature3Desc": "Understand the karmic wounds that block your natural flow of prosperity."
   },
   "how": {
-    "title": "How does it work?",
-    "step1Title": "Enter your data",
-    "step1Desc": "Just your name and date of birth.",
-    "step2Title": "Instant calculation",
-    "step2Desc": "Our algorithm generates your matrix in seconds.",
-    "step3Title": "Read your map",
-    "step3Desc": "Receive the full interpretation of your numbers."
+    "title": "Your Journey of Discovery",
+    "step1Title": "The Key",
+    "step1Desc": "Enter your birth date — it is the code that unlocks your map.",
+    "step2Title": "The First Revelation",
+    "step2Desc": "Our algorithm immediately reveals the 5 core frequencies of your life.",
+    "step3Title": "The Deep Dive",
+    "step3Desc": "Understand your base energies and prepare to uncover dozens of hidden blocks in your full matrix."
   },
   "faq": {
-    "title": "Frequently Asked Questions",
-    "q1": "How is the calculation done?",
-    "a1": "The calculation uses your day, month, and year of birth. These numbers are reduced and organized into an octogram, where each position corresponds to an area of your life.",
-    "q2": "Is the Matrix of Destiny a religion?",
-    "a2": "No. It is a therapeutic tool that combines numerology and archetypes. It can be used by people of any belief.",
+    "title": "Common Questions",
+    "q1": "Will this predict my future?",
+    "a1": "The Destiny Matrix doesn't guess the future; it reveals the energies, talents, and blocks (karma) you carry from birth. By understanding your past and your essence, you gain the power to shape your future.",
+    "q2": "What is the difference between this free reading and the full matrix?",
+    "a2": "The free reading generated here reveals your central pillars: Soul, Personality, Destiny, etc. It is the perfect starting point. The Complete Matrix (an in-depth guide you can acquire later) details your love and wealth channels, past life karmic debts, and much more.",
     "q3": "Is my data secure?",
-    "a3": "Yes! We do not store any information. The calculation is generated instantly in your browser."
+    "a3": "Absolutely. The universe demands privacy. All calculations are done on your own device, and we do not store your birth date or name."
   },
   "footer": {
-    "tagline": "Deciphering the numbers of your journey.",
-    "copy": "© {year} Matrix of Destiny. All rights reserved."
+    "tagline": "The key to unlocking your journey.",
+    "copy": "© {year} Destiny Matrix. All rights reserved."
   }
 }

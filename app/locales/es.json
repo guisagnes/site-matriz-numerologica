@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Matriz del Destino — Descubre el mapa de tu alma"
+    "title": "Matriz del Destino — Descubre el código secreto de tu alma"
   },
   "nav": {
     "brand": "Matriz del Destino",
@@ -9,16 +9,16 @@
     "faq": "Dudas"
   },
   "hero": {
-    "titleLine1": "Descubre el",
-    "titleLine2": "mapa de tu",
-    "titleHighlight": "alma",
-    "desc": "La Matriz del Destino revela tus talentos ocultos, desafíos kármicos y la misión de tu vida — todo a partir de tu fecha de nacimiento.",
-    "perk1": "Gratuito e instantáneo",
-    "perk2": "Basado en los 22 Arcanos",
-    "perk3": "100% privado"
+    "titleLine1": "Descubre qué",
+    "titleLine2": "está bloqueando tu",
+    "titleHighlight": "destino",
+    "desc": "Tu fecha de nacimiento no fue casualidad. Lleva el código de tu alma. La Matriz del Destino revela tus dones ocultos, las deudas kármicas invisibles y la misión que viniste a cumplir. Genera tu matriz central gratis y da el primer paso hacia la claridad.",
+    "perk1": "Revelación instantánea",
+    "perk2": "Descubre patrones repetitivos",
+    "perk3": "Basado en los 22 Arcanos Mayores"
   },
   "form": {
-    "lead": "Completa para generar tu matriz:",
+    "lead": "Ingresa tus datos para revelar la base de tu Matriz:",
     "nameLabel": "Tu nombre",
     "namePlaceholder": "Nombre o apodo",
     "birthLabel": "Fecha de Nacimiento",
@@ -26,45 +26,45 @@
     "genderLabel": "Género",
     "genderF": "Femenino",
     "genderM": "Masculino",
-    "submit": "Revelar Mi Matriz",
-    "trustMsg": "Tus datos no se almacenan",
-    "socialProof": "Usado por terapeutas y numerólogos en",
+    "submit": "Revelar Mi Destino Ahora",
+    "trustMsg": "El cálculo base es 100% gratuito. No se guardan datos.",
+    "socialProof": "Guiando el viaje de miles de personas en",
     "socialProofCountries": "+15 países",
-    "errorName": "Ingresa tu nombre.",
-    "errorDate": "Fecha inválida.",
-    "errorGender": "Selecciona."
+    "errorName": "Necesitamos saber cómo llamarte.",
+    "errorDate": "Fecha inválida. El universo necesita el momento exacto.",
+    "errorGender": "La energía (polaridad) importa. Selecciona."
   },
   "about": {
-    "title": "¿Qué es la Matriz del Destino?",
-    "p1": "Un sistema de autoconocimiento basado en la numerología y los arquetipos del Tarot. Funciona como un mapa de tu alma, calculado exclusivamente a partir de tu fecha de nacimiento.",
-    "p2": "A diferencia de los métodos tradicionales, la Matriz identifica patrones kármicos, bloqueos financieros y las claves para relaciones más saludables.",
-    "feature1Title": "Propósito de Vida",
-    "feature1Desc": "Descubre lo que viniste a realizar y cómo alinear tus acciones con tu esencia.",
-    "feature2Title": "Canal Financiero",
-    "feature2Desc": "Comprende tus talentos naturales para prosperar y lo que bloquea tu flujo de abundancia.",
-    "feature3Title": "Relaciones",
-    "feature3Desc": "Comprende tus patrones amorosos y atrae parejas que nutran tu alma."
+    "title": "¿Por qué la Matriz del Destino es diferente?",
+    "p1": "La Matriz no es solo una lectura genérica. Es un sistema profundo que combina la precisión de la Numerología con los arquetipos de los 22 Arcanos Mayores del Tarot. A través de un octograma sagrado, leemos las frecuencias de tu alma en el momento exacto de tu llegada al mundo.",
+    "p2": "¿Pasas la vida sintiendo que algo falta? ¿Que repites ciclos y bloqueos, ya sea en el amor o en las finanzas? El mapa gratuito que generarás hoy revela las bases de tu energía. Es solo la punta del iceberg frente a la profundidad que esconde tu matriz completa.",
+    "feature1Title": "La Pieza Faltante (Propósito)",
+    "feature1Desc": "Descubre la misión exacta de tu alma en esta vida y por qué sientes los vacíos que sientes.",
+    "feature2Title": "Amor y Karma",
+    "feature2Desc": "Revela el patrón invisible de tus elecciones amorosas y cómo romper los ciclos dolorosos.",
+    "feature3Title": "El Canal del Dinero",
+    "feature3Desc": "Comprende las heridas kármicas que frenan tu flujo natural de prosperidad."
   },
   "how": {
-    "title": "¿Cómo funciona?",
-    "step1Title": "Ingresa tus datos",
-    "step1Desc": "Solo tu nombre y fecha de nacimiento.",
-    "step2Title": "Cálculo instantáneo",
-    "step2Desc": "Nuestro algoritmo genera tu matriz en segundos.",
-    "step3Title": "Lee tu mapa",
-    "step3Desc": "Recibe la interpretación completa de tus números."
+    "title": "Tu Viaje de Descubrimiento",
+    "step1Title": "La Llave de Acceso",
+    "step1Desc": "Ingresa tu fecha de nacimiento — es el código que desbloqueea tu mapa.",
+    "step2Title": "La Primera Revelación",
+    "step2Desc": "Nuestro algoritmo revela inmediatamente las 5 frecuencias centrales de tu vida.",
+    "step3Title": "La Inmersión Profunda",
+    "step3Desc": "Conoce tus energías base y prepárate para desvelar decenas de bloqueos ocultos en tu matriz completa."
   },
   "faq": {
-    "title": "Preguntas Frecuentes",
-    "q1": "¿Cómo se hace el cálculo?",
-    "a1": "El cálculo utiliza el día, mes y año de tu nacimiento. Estos números se reducen y organizan en un octograma, donde cada posición corresponde a un área de tu vida.",
-    "q2": "¿La Matriz del Destino es una religión?",
-    "a2": "No. Es una herramienta terapéutica que combina numerología y arquetipos. Puede ser utilizada por personas de cualquier creencia.",
+    "title": "Dudas Comunes",
+    "q1": "¿Esto revelará mi futuro?",
+    "a1": "La Matriz del Destino no adivina el futuro, revela las energías, talentos y bloqueos (karmas) que llevas desde el nacimiento. Al comprender tu pasado y tu esencia, ganas el poder de moldear tu futuro.",
+    "q2": "¿Cuál es la diferencia entre esta lectura gratuita y la matriz completa?",
+    "a2": "La lectura gratuita generada aquí revela tus pilares centrales: Alma, Personalidad, Destino, etc. Es el punto de partida ideal. La Matriz Completa (un material profundo que podrás adquirir después) detalla tus canales amoroso, financiero, deudas kármicas de vidas pasadas y mucho más.",
     "q3": "¿Mis datos están seguros?",
-    "a3": "¡Sí! No almacenamos ninguna información. El cálculo se genera instantáneamente en tu navegador."
+    "a3": "Absolutamente. El universo exige privacidad. Todo el cálculo se hace en tu propio dispositivo y no almacenamos tu fecha de nacimiento ni tu nombre."
   },
   "footer": {
-    "tagline": "Descifrando los números de tu camino.",
+    "tagline": "La clave para desbloquear tu viaje.",
     "copy": "© {year} Matriz del Destino. Todos los derechos reservados."
   }
 }
