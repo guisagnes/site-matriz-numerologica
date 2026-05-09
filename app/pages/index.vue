@@ -274,7 +274,7 @@ useHead({ title: () => t('meta.title') })
   width: 720px; height: 720px;
   top: 50%; left: 80%;
   transform: translate(-50%, -50%);
-  color: rgba(87, 83, 78, 0.08); /* Warm dark gray */
+  color: rgba(201, 152, 46, 0.12); /* Golden clear tone */
   pointer-events: none; z-index: 0;
 }
 
