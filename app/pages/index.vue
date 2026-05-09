@@ -2,6 +2,60 @@
   <div class="landing-page">
     <!-- ════ HERO ════ -->
     <section class="hero">
+      <!-- Decorative tarot cards -->
+      <div class="hero-cards" aria-hidden="true">
+        <!-- Floating around the H1 / Left Column -->
+        <div class="tarot-card" style="top: 8%; left: 3%; rotate: -15deg;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="tarot-card tarot-card--sm" style="top: 4%; left: 28%; rotate: 12deg;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </div>
+        <div class="tarot-card tarot-card--lg" style="top: 18%; left: 44%; rotate: 22deg;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </div>
+        <div class="tarot-card tarot-card--sm" style="top: 45%; left: -1%; rotate: -8deg;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div class="tarot-card" style="top: 65%; left: 25%; rotate: 18deg;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="7" y="2" width="10" height="20" rx="2" transform="rotate(45 12 12)"/></svg>
+        </div>
+        <div class="tarot-card" style="bottom: 8%; left: 6%; rotate: -20deg;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6q-6 18-12 0Q12-12 18 6z"/></svg>
+        </div>
+        <div class="tarot-card tarot-card--sm" style="bottom: 12%; left: 38%; rotate: 15deg;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 2v20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+      </div>
+
+      <!-- Sacred geometry background -->
+      <svg class="sacred-geo" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Concentric circles -->
+        <circle cx="200" cy="200" r="190" stroke="currentColor" stroke-width="1"/>
+        <circle cx="200" cy="200" r="150" stroke="currentColor" stroke-width="1"/>
+        <circle cx="200" cy="200" r="110" stroke="currentColor" stroke-width="0.8"/>
+        <circle cx="200" cy="200" r="70" stroke="currentColor" stroke-width="0.8"/>
+        <circle cx="200" cy="200" r="30" stroke="currentColor" stroke-width="0.8"/>
+        <!-- Octagram (8 lines through center) -->
+        <line x1="200" y1="10" x2="200" y2="390" stroke="currentColor" stroke-width="0.8"/>
+        <line x1="10" y1="200" x2="390" y2="200" stroke="currentColor" stroke-width="0.8"/>
+        <line x1="56" y1="56" x2="344" y2="344" stroke="currentColor" stroke-width="0.8"/>
+        <line x1="344" y1="56" x2="56" y2="344" stroke="currentColor" stroke-width="0.8"/>
+        <!-- Inner diamond -->
+        <polygon points="200,50 350,200 200,350 50,200" stroke="currentColor" stroke-width="1" fill="none"/>
+        <!-- Inner rotated square -->
+        <rect x="117" y="117" width="166" height="166" stroke="currentColor" stroke-width="0.8" fill="none"/>
+        <!-- Dots at intersections -->
+        <circle cx="200" cy="10" r="3" fill="currentColor"/>
+        <circle cx="200" cy="390" r="3" fill="currentColor"/>
+        <circle cx="10" cy="200" r="3" fill="currentColor"/>
+        <circle cx="390" cy="200" r="3" fill="currentColor"/>
+        <circle cx="56" cy="56" r="2.5" fill="currentColor"/>
+        <circle cx="344" cy="56" r="2.5" fill="currentColor"/>
+        <circle cx="56" cy="344" r="2.5" fill="currentColor"/>
+        <circle cx="344" cy="344" r="2.5" fill="currentColor"/>
+        <circle cx="200" cy="200" r="4" fill="currentColor"/>
+      </svg>
       <div class="section-container hero-grid">
         <div class="hero-copy">
           <h1 class="hero-title">{{ $t('hero.titleLine1') }}<br />{{ $t('hero.titleLine2') }} <em>{{ $t('hero.titleHighlight') }}</em></h1>
@@ -194,6 +248,36 @@ useHead({ title: () => t('meta.title') })
   padding: var(--space-16) 0;
   overflow: hidden;
 }
+
+/* ─── Tarot Card Background ──── */
+.hero-cards {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none;
+}
+.tarot-card {
+  position: absolute;
+  width: 64px; height: 96px;
+  border: 1.5px solid rgba(201, 152, 46, 0.1);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(201, 152, 46, 0.08);
+  background: rgba(201, 152, 46, 0.02);
+}
+.tarot-card svg { width: 24px; height: 24px; }
+.tarot-card--lg { width: 80px; height: 120px; }
+.tarot-card--lg svg { width: 30px; height: 30px; }
+.tarot-card--sm { width: 48px; height: 72px; }
+.tarot-card--sm svg { width: 18px; height: 18px; }
+
+.sacred-geo {
+  position: absolute;
+  width: 720px; height: 720px;
+  top: 50%; left: 80%;
+  transform: translate(-50%, -50%);
+  color: rgba(87, 83, 78, 0.08); /* Warm dark gray */
+  pointer-events: none; z-index: 0;
+}
+
 .hero-grid {
   position: relative; z-index: 1;
   display: grid;

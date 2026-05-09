@@ -126,8 +126,19 @@ onUnmounted(() => document.removeEventListener('click', onClickOutside))
 .nav-icon { font-size: 1rem; color: var(--color-primary); }
 .nav-name { font-family: var(--font-display); font-size: 1.125rem; font-weight: 600; color: var(--color-text); letter-spacing: -0.01em; }
 .nav-links { display: flex; gap: var(--space-8); }
-.nav-link { font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary); text-decoration: none; transition: color var(--duration) var(--ease-default); }
-.nav-link:hover { color: var(--color-text); }
+.nav-link {
+  font-size: 0.8125rem; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase;
+  color: var(--color-text-muted); text-decoration: none;
+  position: relative; padding-bottom: 2px;
+  transition: color var(--duration) var(--ease-default);
+}
+.nav-link::after {
+  content: ''; position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 1.5px; background: var(--color-primary);
+  transition: width var(--duration) var(--ease-default);
+}
+.nav-link:hover { color: var(--color-text-heading); }
+.nav-link:hover::after { width: 100%; }
 
 .nav-right { display: flex; align-items: center; gap: var(--space-4); }
 
