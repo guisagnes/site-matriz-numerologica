@@ -1,5 +1,5 @@
 <template>
-  <main class="page">
+  <main class="page-container">
     <div class="page-content">
       <!-- Back link -->
       <a class="back-link" href="/" @click.prevent="navigateTo('/')">
@@ -8,7 +8,6 @@
 
       <!-- Header -->
       <header class="result-header">
-        <span class="brand-icon" aria-hidden="true">✦</span>
         <h1 class="result-title">Sua Matriz Numerológica</h1>
         <p class="result-meta">{{ result.fullName }} · {{ result.birthdate }}</p>
       </header>
@@ -38,11 +37,12 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRoute, navigateTo, useHead } from '#imports'
 import { useNumerology } from '~/composables/useNumerology'
 import type { NumerologyFormData } from '~/types/numerology'
 
 const route = useRoute()
-const { calculate, isValidDate } = useNumerology()
+const { calculate } = useNumerology()
 
 // Ler dados dos query params
 const formData = computed<NumerologyFormData>(() => ({
@@ -113,26 +113,29 @@ useHead({
 </script>
 
 <style scoped>
-.page {
+.page-container {
   min-height: 100vh;
-  padding: var(--space-6) var(--space-4);
+  padding: var(--space-8) var(--space-4);
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 10;
 }
 
 .page-content {
   width: 100%;
-  max-width: 720px;
+  max-width: 800px;
 }
 
 /* ─── Back Link ─────────────────────────────── */
 .back-link {
   display: inline-block;
-  font-size: 0.8125rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--color-text-secondary);
   text-decoration: none;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
   transition: color var(--duration) var(--ease-default);
 }
 
@@ -143,71 +146,71 @@ useHead({
 /* ─── Header ────────────────────────────────── */
 .result-header {
   text-align: center;
-  margin-bottom: var(--space-8);
-}
-
-.brand-icon {
-  display: block;
-  font-size: 1.5rem;
-  color: var(--color-primary);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-12);
 }
 
 .result-title {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 2.5rem;
   color: var(--color-text);
+  margin-bottom: var(--space-2);
   letter-spacing: -0.02em;
-  margin-bottom: var(--space-1);
 }
 
 .result-meta {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--color-text-secondary);
+  font-family: var(--font-body);
 }
 
 /* ─── Grid ──────────────────────────────────── */
 .numbers-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--space-4);
-  margin-bottom: var(--space-8);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-6);
+  margin-bottom: var(--space-12);
 }
 
 .number-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: var(--space-6) var(--space-4);
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
   text-align: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
   transition: box-shadow var(--duration) var(--ease-default),
-              transform var(--duration) var(--ease-default);
+              transform var(--duration) var(--ease-default),
+              background var(--duration) var(--ease-default);
 }
 
 .number-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  transform: translateY(-4px);
 }
 
 .number-value {
-  font-size: 2.5rem;
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: 3.5rem;
   color: var(--color-primary);
   line-height: 1;
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-4);
 }
 
 .number-label {
-  font-size: 0.875rem;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: var(--space-2);
 }
 
 .number-description {
-  font-size: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
   color: var(--color-text-secondary);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 /* ─── CTA ───────────────────────────────────── */
@@ -218,36 +221,34 @@ useHead({
 
 .cta-button {
   display: inline-block;
-  padding: var(--space-3) var(--space-8);
-  border: 1px solid var(--color-border);
+  padding: 1rem 2rem;
+  border: none;
   border-radius: var(--radius-md);
-  background: var(--color-surface);
+  background: rgba(255, 255, 255, 0.8);
   color: var(--color-text);
-  font-family: inherit;
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
   transition: all var(--duration) var(--ease-default);
 }
 
 .cta-button:hover {
-  border-color: var(--color-primary);
-  color: var(--color-primary);
-}
-
-.cta-button:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+  color: var(--color-primary-hover);
 }
 
 /* ─── Responsive ────────────────────────────── */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .numbers-grid {
     grid-template-columns: 1fr;
   }
 
   .result-title {
-    font-size: 1.25rem;
+    font-size: 2rem;
   }
 }
 </style>

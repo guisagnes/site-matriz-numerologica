@@ -1,31 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Sas:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/* ─────────────────────────────────────
-   Design System — Tema Claro Esotérico
-   ───────────────────────────────────── */
 :root {
   /* Background */
-  --color-bg: #faf8f5;
+  --color-bg-top: #fbf5ee;
+  --color-bg-bottom: #f2dec5;
   --color-surface: #ffffff;
-  --color-surface-alt: #f3f0eb;
 
   /* Text */
-  --color-text: #1a1a2e;
-  --color-text-secondary: #6b7280;
-  --color-text-muted: #9ca3af;
+  --color-text: #1a1a1a;
+  --color-text-secondary: #716052;
+  --color-text-muted: #a6988d;
 
-  /* Primary — Violeta (espiritualidade) */
-  --color-primary: #7c5cbf;
-  --color-primary-light: #a78bfa;
-  --color-primary-soft: rgba(124, 92, 191, 0.08);
-  --color-primary-hover: #6b4fa8;
+  /* Primary — Golden/Brown */
+  --color-primary: #b89150;
+  --color-primary-light: #e6cd98;
+  --color-primary-soft: rgba(184, 145, 80, 0.08);
+  --color-primary-hover: #9c773a;
 
-  /* Accent — Dourado (sabedoria, numerologia) */
-  --color-accent: #b8860b;
-  --color-accent-soft: rgba(184, 134, 11, 0.08);
+  /* Accent */
+  --color-accent: #4a3b2b;
 
   /* Borders */
-  --color-border: #e5e2dd;
+  --color-border: #e6dac8;
   --color-border-focus: var(--color-primary);
 
   /* Feedback */
@@ -34,10 +30,10 @@
   --color-success: #16a34a;
 
   /* Typography */
-  --font-display: 'Cormorant Garamond', 'Georgia', serif;
-  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Playwrite DE Sas', cursive;
+  --font-body: 'Poppins', sans-serif;
 
-  /* Spacing (múltiplos de 4px) */
+  /* Spacing */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -72,16 +68,18 @@
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-bg);
+  background: linear-gradient(180deg, var(--color-bg-top) 0%, var(--color-bg-bottom) 100%);
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
+  font-weight: 400;
 }
 
 a {
