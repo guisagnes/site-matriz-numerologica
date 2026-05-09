@@ -44,6 +44,10 @@ import type { NumerologyFormData } from '~/types/numerology'
 const route = useRoute()
 const { calculate } = useNumerology()
 
+definePageMeta({
+  layout: false
+})
+
 // Ler dados dos query params
 const formData = computed<NumerologyFormData>(() => ({
   name: (route.query.name as string) || '',
@@ -120,6 +124,7 @@ useHead({
   justify-content: center;
   position: relative;
   z-index: 10;
+  background: transparent;
 }
 
 .page-content {
@@ -129,14 +134,16 @@ useHead({
 
 /* ─── Back Link ─────────────────────────────── */
 .back-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.9375rem;
   font-weight: 500;
   color: var(--color-text-secondary);
   text-decoration: none;
   margin-bottom: var(--space-8);
-  transition: color var(--duration) var(--ease-default);
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
 .back-link:hover {
@@ -150,16 +157,20 @@ useHead({
 }
 
 .result-title {
+  font-family: var(--font-display);
   font-size: 2.5rem;
+  font-weight: 700;
   color: var(--color-text);
   margin-bottom: var(--space-2);
   letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .result-meta {
-  font-size: 1rem;
-  color: var(--color-text-secondary);
+  font-size: 1.0625rem;
+  color: var(--color-primary);
   font-family: var(--font-body);
+  font-weight: 500;
 }
 
 /* ─── Grid ──────────────────────────────────── */
@@ -171,36 +182,37 @@ useHead({
 }
 
 .number-card {
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: var(--color-surface-glass);
+  border: 1px solid rgba(255, 255, 255, 1);
   border-radius: var(--radius-lg);
   padding: var(--space-8) var(--space-6);
   text-align: center;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
-  transition: box-shadow var(--duration) var(--ease-default),
-              transform var(--duration) var(--ease-default),
-              background var(--duration) var(--ease-default);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--duration-fast) var(--ease-out),
+              transform var(--duration-fast) var(--ease-out),
+              background var(--duration-fast) var(--ease-out);
 }
 
 .number-card:hover {
   background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-md);
   transform: translateY(-4px);
 }
 
 .number-value {
   font-family: var(--font-display);
   font-size: 3.5rem;
+  font-weight: 700;
   color: var(--color-primary);
-  line-height: 1;
-  margin-bottom: var(--space-4);
+  line-height: 1.1;
+  margin-bottom: var(--space-2);
 }
 
 .number-label {
   font-family: var(--font-body);
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: var(--space-2);
@@ -208,7 +220,7 @@ useHead({
 
 .number-description {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.9375rem;
   color: var(--color-text-secondary);
   line-height: 1.6;
 }
@@ -216,39 +228,50 @@ useHead({
 /* ─── CTA ───────────────────────────────────── */
 .cta-section {
   text-align: center;
-  padding-bottom: var(--space-8);
+  padding-bottom: var(--space-12);
 }
 
 .cta-button {
-  display: inline-block;
-  padding: 1rem 2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.125rem 2.5rem;
   border: none;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.8);
-  color: var(--color-text);
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: #ffffff;
   font-family: var(--font-body);
-  font-size: 1rem;
+  font-size: 1.0625rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  transition: all var(--duration) var(--ease-default);
+  box-shadow: 0 4px 12px var(--color-primary-soft);
+  transition: all var(--duration-fast) var(--ease-out);
 }
 
 .cta-button:hover {
-  background: #ffffff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  background: var(--color-primary-hover);
+  box-shadow: 0 6px 16px var(--color-primary-soft);
   transform: translateY(-2px);
-  color: var(--color-primary-hover);
+}
+
+.cta-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8), 0 0 0 6px var(--color-primary);
 }
 
 /* ─── Responsive ────────────────────────────── */
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .numbers-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-4);
   }
 
   .result-title {
     font-size: 2rem;
+  }
+  
+  .number-card {
+    padding: var(--space-6) var(--space-4);
   }
 }
 </style>

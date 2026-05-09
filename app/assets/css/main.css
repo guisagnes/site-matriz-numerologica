@@ -1,39 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Playwrite+DE+Sas:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Background */
-  --color-bg-top: #fbf5ee;
-  --color-bg-bottom: #f2dec5;
-  --color-surface: #ffffff;
+  /* Premium Beige/Gold Palette */
+  --color-bg: #FAF6F0;
+  --color-surface: #FFFFFF;
+  --color-surface-glass: rgba(255, 255, 255, 0.6);
+  
+  --color-text: #1C1917;
+  --color-text-secondary: #57534E;
+  --color-text-muted: #A8A29E;
 
-  /* Text */
-  --color-text: #1a1a1a;
-  --color-text-secondary: #716052;
-  --color-text-muted: #a6988d;
+  --color-primary: #B48C48;
+  --color-primary-light: #E5CD8D;
+  --color-primary-hover: #9C7536;
+  --color-primary-soft: rgba(180, 140, 72, 0.1);
 
-  /* Primary — Golden/Brown */
-  --color-primary: #b89150;
-  --color-primary-light: #e6cd98;
-  --color-primary-soft: rgba(184, 145, 80, 0.08);
-  --color-primary-hover: #9c773a;
-
-  /* Accent */
-  --color-accent: #4a3b2b;
-
-  /* Borders */
-  --color-border: #e6dac8;
-  --color-border-focus: var(--color-primary);
-
-  /* Feedback */
-  --color-error: #dc2626;
-  --color-error-soft: rgba(220, 38, 38, 0.06);
-  --color-success: #16a34a;
+  --color-border: rgba(180, 140, 72, 0.15);
+  --color-error: #DC2626;
 
   /* Typography */
-  --font-display: 'Playwrite DE Sas', cursive;
-  --font-body: 'Poppins', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
 
-  /* Spacing */
+  /* Spacing (4px scale) */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -42,24 +31,32 @@
   --space-8: 2rem;
   --space-12: 3rem;
   --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* Layout */
+  --content-width: 1080px;
+  --content-padding: clamp(1.5rem, 5vw, 3rem);
 
   /* Border radius */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 2px 8px rgba(28, 25, 23, 0.04);
+  --shadow-md: 0 8px 24px rgba(28, 25, 23, 0.06);
+  --shadow-lg: 0 24px 48px rgba(28, 25, 23, 0.08);
 
   /* Transitions */
-  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration: 200ms;
+  --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --duration: 300ms;
+  --duration-fast: 150ms;
 }
 
-/* Reset */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -68,7 +65,10 @@
 
 body {
   font-family: var(--font-body);
-  background: linear-gradient(180deg, var(--color-bg-top) 0%, var(--color-bg-bottom) 100%);
+  background-color: var(--color-bg);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(229, 205, 141, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(180, 140, 72, 0.1) 0px, transparent 50%);
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -79,7 +79,8 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 a {
@@ -87,14 +88,11 @@ a {
   text-decoration: none;
 }
 
+button {
+  font-family: var(--font-body);
+}
+
 ::selection {
   background-color: var(--color-primary-soft);
   color: var(--color-primary);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
 }

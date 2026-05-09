@@ -1,0 +1,70 @@
+{
+  "meta": {
+    "title": "Matriz do Destino — Descubra o mapa da sua alma"
+  },
+  "nav": {
+    "brand": "Matriz do Destino",
+    "about": "Sobre",
+    "howItWorks": "Como funciona",
+    "faq": "FAQ"
+  },
+  "hero": {
+    "titleLine1": "Descubra o mapa",
+    "titleLine2": "da sua",
+    "titleHighlight": "alma",
+    "desc": "A Matriz do Destino revela seus talentos ocultos, desafios kármicos e a missão da sua vida — tudo a partir da sua data de nascimento.",
+    "perk1": "Gratuito e instantâneo",
+    "perk2": "Baseado nos 22 Arcanos",
+    "perk3": "100% privado"
+  },
+  "form": {
+    "lead": "Preencha para gerar sua matriz:",
+    "nameLabel": "Seu nome",
+    "namePlaceholder": "Nome ou apelido",
+    "birthLabel": "Data de Nascimento",
+    "birthPlaceholder": "DD/MM/AAAA",
+    "genderLabel": "Gênero",
+    "genderF": "Feminino",
+    "genderM": "Masculino",
+    "submit": "Revelar Minha Matriz",
+    "trustMsg": "Seus dados não são armazenados",
+    "socialProof": "Usado por terapeutas e numerólogos em",
+    "socialProofCountries": "+15 países",
+    "errorName": "Insira seu nome.",
+    "errorDate": "Data inválida.",
+    "errorGender": "Selecione."
+  },
+  "about": {
+    "title": "O que é a Matriz do Destino?",
+    "p1": "Um sistema de autoconhecimento baseado na numerologia e nos arquétipos do Tarot. Funciona como um mapa da sua alma, calculado exclusivamente a partir da sua data de nascimento.",
+    "p2": "Diferente de métodos tradicionais, a Matriz identifica padrões kármicos, bloqueios financeiros e as chaves para relacionamentos mais saudáveis.",
+    "feature1Title": "Propósito de Vida",
+    "feature1Desc": "Descubra o que você veio realizar e como alinhar suas ações com a sua essência.",
+    "feature2Title": "Canal Financeiro",
+    "feature2Desc": "Entenda seus talentos naturais para prosperar e o que bloqueia o seu fluxo de abundância.",
+    "feature3Title": "Relacionamentos",
+    "feature3Desc": "Compreenda seus padrões amorosos e atraia parcerias que nutrem sua alma."
+  },
+  "how": {
+    "title": "Como funciona?",
+    "step1Title": "Insira seus dados",
+    "step1Desc": "Apenas seu nome e data de nascimento.",
+    "step2Title": "Cálculo instantâneo",
+    "step2Desc": "Nosso algoritmo gera sua matriz em segundos.",
+    "step3Title": "Leia seu mapa",
+    "step3Desc": "Receba a interpretação completa dos seus números."
+  },
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "q1": "Como o cálculo é feito?",
+    "a1": "O cálculo utiliza o dia, mês e ano do seu nascimento. Esses números são reduzidos e organizados em um octograma, onde cada posição corresponde a uma área da sua vida.",
+    "q2": "A Matriz do Destino é religião?",
+    "a2": "Não. É uma ferramenta terapêutica que combina numerologia e arquétipos. Pode ser utilizada por pessoas de qualquer crença.",
+    "q3": "Meus dados estão seguros?",
+    "a3": "Sim! Não armazenamos nenhuma informação. O cálculo é gerado instantaneamente no seu navegador."
+  },
+  "footer": {
+    "tagline": "Decifrando os números da sua jornada.",
+    "copy": "© {year} Matriz do Destino. Todos os direitos reservados."
+  }
+}
