@@ -5,6 +5,10 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   modules: ['@nuxtjs/i18n'],
 
+  nitro: {
+    preset: 'static',
+  },
+
   i18n: {
     locales: [
       { code: 'pt', language: 'pt-BR', name: 'Português', file: 'pt.json' },
@@ -15,10 +19,6 @@ export default defineNuxtConfig({
     strategy: 'prefix_except_default',
     lazy: true,
     langDir: '../app/locales',
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'i18n_locale',
-      redirectOn: 'root',
-    },
+    detectBrowserLanguage: false,
   },
 })

@@ -177,7 +177,7 @@ useHead({ title: () => t('meta.title') })
   font-family: var(--font-display);
   font-size: clamp(1.75rem, 3vw, 2.25rem);
   font-weight: 700;
-  color: var(--color-text);
+  color: var(--color-text-heading);
   letter-spacing: -0.02em;
   margin-bottom: var(--space-4);
 }
@@ -272,7 +272,7 @@ useHead({ title: () => t('meta.title') })
 .form-lead {
   font-family: var(--font-display);
   font-size: 1.125rem; font-weight: 600;
-  color: var(--color-text);
+  color: var(--color-text-heading);
   margin-bottom: var(--space-6);
 }
 .premium-form { display: flex; flex-direction: column; gap: var(--space-6); }
@@ -361,7 +361,7 @@ useHead({ title: () => t('meta.title') })
 }
 .feature-card h3 {
   font-family: var(--font-display); font-size: 1rem; font-weight: 600;
-  color: var(--color-text); margin-bottom: var(--space-1);
+  color: var(--color-text-heading); margin-bottom: var(--space-1);
 }
 .feature-card p { font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.5; }
 
@@ -388,7 +388,7 @@ useHead({ title: () => t('meta.title') })
 }
 .step h3 {
   font-family: var(--font-display); font-size: 1.125rem; font-weight: 600;
-  color: var(--color-text); margin-bottom: var(--space-2);
+  color: var(--color-text-heading); margin-bottom: var(--space-2);
 }
 .step p { font-size: 0.9375rem; color: var(--color-text-secondary); line-height: 1.5; }
 
@@ -409,7 +409,7 @@ useHead({ title: () => t('meta.title') })
 .faq-item summary {
   padding: var(--space-4) var(--space-6);
   font-family: var(--font-display); font-size: 1rem; font-weight: 600;
-  color: var(--color-text); cursor: pointer; list-style: none;
+  color: var(--color-text-heading); cursor: pointer; list-style: none;
   display: flex; justify-content: space-between; align-items: center;
 }
 .faq-item summary::-webkit-details-marker { display: none; }

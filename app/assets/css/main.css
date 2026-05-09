@@ -7,15 +7,16 @@
   --color-surface-glass: rgba(255, 255, 255, 0.6);
   
   --color-text: #1C1917;
+  --color-text-heading: #3D2E1F;
   --color-text-secondary: #57534E;
   --color-text-muted: #A8A29E;
 
-  --color-primary: #B48C48;
-  --color-primary-light: #E5CD8D;
-  --color-primary-hover: #9C7536;
-  --color-primary-soft: rgba(180, 140, 72, 0.1);
+  --color-primary: #C9982E;
+  --color-primary-light: #E8C45A;
+  --color-primary-hover: #B0851F;
+  --color-primary-soft: rgba(201, 152, 46, 0.1);
 
-  --color-border: rgba(180, 140, 72, 0.15);
+  --color-border: rgba(201, 152, 46, 0.15);
   --color-error: #DC2626;
 
   /* Typography */
@@ -67,8 +68,8 @@ body {
   font-family: var(--font-body);
   background-color: var(--color-bg);
   background-image: 
-    radial-gradient(at 0% 0%, rgba(229, 205, 141, 0.15) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(180, 140, 72, 0.1) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(232, 196, 90, 0.12) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(201, 152, 46, 0.08) 0px, transparent 50%);
   color: var(--color-text);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
