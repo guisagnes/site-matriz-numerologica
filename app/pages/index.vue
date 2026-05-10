@@ -515,8 +515,17 @@ useHead({ title: () => t('meta.title') })
   .hero-form-col { justify-content: stretch; }
   .form-card { max-width: 100%; }
   .steps { grid-template-columns: 1fr; gap: var(--space-6); }
+  .sacred-geo {
+    width: 600px; height: 600px;
+    top: 30%; left: 50%;
+  }
 }
 @media (max-width: 640px) {
   .form-card { padding: var(--space-6); }
+  .sacred-geo {
+    width: 400px; height: 400px;
+    top: 25%; left: 50%;
+  }
+  .hero-cards { display: none; }
 }
 </style>
